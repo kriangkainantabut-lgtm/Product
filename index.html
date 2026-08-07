@@ -15,7 +15,6 @@
             --border-hover: #d8d5ca;
             --text-main: #1c1917;
             --text-muted: #78716c;
-            --accent-brand: #2563eb;
             
             /* Badges & Status */
             --tag-bg: #f0eee6;
@@ -32,6 +31,10 @@
             --danger-bg: #fef2f2;
             --danger-border: #fecaca;
             --danger-text: #991b1b;
+
+            --info-bg: #eff6ff;
+            --info-border: #bfdbfe;
+            --info-text: #1e40af;
         }
 
         * {
@@ -221,7 +224,7 @@
             margin-bottom: 12px;
         }
 
-        /* Status Blocks (แทนการใช้ Table) */
+        /* Status Blocks Layout */
         .status-block-group {
             display: flex;
             flex-direction: column;
@@ -263,12 +266,12 @@
         }
         .status-blocker .status-label { color: #b91c1c; }
 
-        .status-empty {
-            background-color: var(--card-inner);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            font-style: italic;
+        .status-learning {
+            background-color: var(--info-bg);
+            border: 1px solid var(--info-border);
+            color: var(--info-text);
         }
+        .status-learning .status-label { color: #1d4ed8; }
 
         .task-divider {
             height: 1px;
@@ -342,6 +345,10 @@
                             <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
                             <span class="status-content">Reset PC และติดตั้งระบบปฏิบัติการ Windows ใหม่เรียบร้อยแล้ว</span>
                         </div>
+                        <div class="status-block status-learning">
+                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
+                            <span class="status-content">การเตรียม USB Boot ให้มี Driver เบื้องต้นล่วงหน้า ช่วยลดเวลาในการ Setup เครื่องใหม่ลงได้กว่า 30%</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,6 +373,10 @@
                             <span class="status-label">⚠️ ปัญหา / อุปสรรค</span>
                             <span class="status-content">ความท้าทายในการคำนวณระยะรัศมีของสัญญาณให้ครอบคลุมพื้นที่</span>
                         </div>
+                        <div class="status-block status-learning">
+                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
+                            <span class="status-content">การปรับ Tx Power ให้พอดีกับระยะห้อง ช่วยลดสัญญาณกวนกัน (Co-channel Interference) ระหว่าง AP แต่ละจุดได้ดีขึ้น</span>
+                        </div>
                     </div>
                 </div>
 
@@ -378,6 +389,10 @@
                         <div class="status-block status-completed">
                             <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
                             <span class="status-content">ตรวจเช็คหัวพิมพ์และตรวจสอบปริมาณหมึกคงเหลือเรียบร้อยแล้ว</span>
+                        </div>
+                        <div class="status-block status-learning">
+                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
+                            <span class="status-content">การทำความสะอาดหัวพิมพ์ด้วยระบบ Head Cleaning อย่างสม่ำเสมอ ช่วยยืดอายุการใช้งานและลดปัญหาหมึกขาดช่วง</span>
                         </div>
                     </div>
                 </div>
@@ -414,6 +429,10 @@
                             <span class="status-label">⚠️ ปัญหา / อุปสรรค</span>
                             <span class="status-content">การพิจารณาเลือกสเปคอุปกรณ์ให้เหมาะสมกับปริมาณการใช้งานจริง</span>
                         </div>
+                        <div class="status-block status-learning">
+                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
+                            <span class="status-content">RAID 6 สามารถรองรับ Drive เสียพร้อมกันได้สูงสุด 2 ลูก เหมาะกับระบบที่เน้นความปลอดภัยของข้อมูลสูง แต่ต้องแลกกับ Read/Write Speed ที่ช้ากว่า RAID 10</span>
+                        </div>
                     </div>
                 </div>
 
@@ -430,6 +449,10 @@
                         <div class="status-block status-blocker">
                             <span class="status-label">⚠️ ปัญหา / อุปสรรค</span>
                             <span class="status-content">ยังไม่พบสาเหตุที่ชัดเจนแน่ชัด กำลังอยู่ในช่วงรวบรวมข้อมูลเพิ่มเติม</span>
+                        </div>
+                        <div class="status-block status-learning">
+                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
+                            <span class="status-content">ปัญหา Wi-Fi บน macOS มักเกี่ยวข้องกันหลายส่วน เช่น Wi-Fi Roaming, การตั้งค่า DNS หรือการจดจำโปรไฟล์ Wi-Fi เก่า จึงต้องทำการสแกน Wireless Diagnostic เพิ่มเติม</span>
                         </div>
                     </div>
                 </div>
