@@ -1,526 +1,158 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายงานผลการปฏิบัติงานประจำสัปดาห์ (Weekly Work Report)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Palette สี Modern Slate Clean */
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --card-inner: #f1f5f9;
-            --border: #e2e8f0;
-            --border-hover: #cbd5e1;
-            
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            
-            /* Status Indicators */
-            --tag-bg: #e2e8f0;
-            --tag-text: #334155;
-            
-            --success-bg: #f0fdf4;
-            --success-border: #bbf7d0;
-            --success-text: #166534;
-            
-            --warning-bg: #fffbeb;
-            --warning-border: #fef08a;
-            --warning-text: #854d0e;
-            
-            --danger-bg: #fef2f2;
-            --danger-border: #fecaca;
-            --danger-text: #991b1b;
-
-            --info-bg: #f0f9ff;
-            --info-border: #bae6fd;
-            --info-text: #0369a1;
-            
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', 'Sarabun', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 780px;
-        }
-
-        /* Header Card */
-        .header-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .header-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
-        .tag-category {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            background: #e0e7ff;
-            color: #3730a3;
-            border-radius: 20px;
-            margin-bottom: 12px;
-        }
-
-        .header-title {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
-            line-height: 1.3;
-            margin-bottom: 4px;
-        }
-
-        .header-subtitle {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .meta-item strong {
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        /* Overview Card (ส่วนที่เพิ่มใหม่) */
-        .overview-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-left: 4px solid #3b82f6;
-            border-radius: 16px;
-            padding: 20px 24px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .overview-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .overview-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-number {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--text-main);
-            line-height: 1.1;
-        }
-
-        .stat-number.success { color: #16a34a; }
-        .stat-number.warning { color: #d97706; }
-
-        .stat-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 6px;
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 16px;
-            letter-spacing: -0.2px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Day Cards */
-        .day-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
-        }
-
-        .day-card:hover {
-            border-color: var(--border-hover);
-            box-shadow: var(--shadow-md);
-        }
-
-        .day-header {
-            padding: 16px 24px;
-            background-color: var(--card-inner);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .day-date {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .badge-count {
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 12px;
-            background: #ffffff;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-        }
-
-        .task-list {
-            padding: 24px;
-        }
-
-        .task-item {
-            margin-bottom: 20px;
-        }
-
-        .task-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .task-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Status Blocks Layout */
-        .status-block-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .status-block {
-            display: flex;
-            align-items: flex-start;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 13px;
-            gap: 12px;
-        }
-
-        .status-label {
-            font-weight: 700;
-            min-width: 140px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-content {
-            flex: 1;
-            line-height: 1.5;
-        }
-
-        /* Status Variants */
-        .status-completed {
-            background-color: var(--success-bg);
-            border: 1px solid var(--success-border);
-            color: var(--success-text);
-        }
-
-        .status-blocker {
-            background-color: var(--danger-bg);
-            border: 1px solid var(--danger-border);
-            color: var(--danger-text);
-        }
-
-        .status-learning {
-            background-color: var(--info-bg);
-            border: 1px solid var(--info-border);
-            color: var(--info-text);
-        }
-
-        .task-divider {
-            height: 1px;
-            background-color: var(--border);
-            margin: 20px 0;
-            border: none;
-        }
-
-        .empty-day-note {
-            padding: 24px;
-            color: var(--text-muted);
-            font-style: italic;
-            font-size: 14px;
-            background: #fafafa;
-            text-align: center;
-        }
-
-        @media (max-width: 600px) {
-            body { padding: 20px 12px; }
-            .header-card, .task-list { padding: 20px; }
-            .stats-grid { grid-template-columns: 1fr; gap: 10px; }
-            .status-block { flex-direction: column; gap: 6px; }
-            .status-label { min-width: auto; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Kriangkai Nantabut | Portfolio">
+<meta property="og:description" content="IT Support &amp; Backend API | The Senizens, Elegance Product, Sukjai">
+<meta name="description" content="IT Support &amp; Backend API portfolio">
+<title>Kriangkai Nantabut | Portfolio</title>
+<meta name="theme-color" content="#0a0f14">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="assets/js/theme-init.js"></script>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-    <div class="container">
-        <!-- Header Card -->
-        <div class="header-card">
-            <span class="tag-category">Weekly Work Report</span>
-            <h1 class="header-title">รายงานการปฏิบัติงานประจำสัปดาห์</h1>
-            <div class="header-subtitle">IT & Technical Support Performance Log</div>
-            
-            <div class="meta-grid">
-                <div class="meta-item"><strong>ช่วงเวลา:</strong> 3 – 7 สิงหาคม 2026</div>
-                <div class="meta-item"><strong>แผนก/ฝ่าย:</strong> เทคโนโลยีสารสนเทศ (IT Support)</div>
-            </div>
-        </div>
-
-        <!-- Weekly Overview Section (เพิ่มตามจุดที่ต้องการ) -->
-        <div class="overview-card">
-            <div class="overview-title">
-                <span>📌</span> ภาพรวมสัปดาห์นี้ (Weekly Overview)
-            </div>
-            <div class="overview-text">
-                สัปดาห์นี้เน้นการดูแลรักษาและเพิ่มประสิทธิภาพระบบไอทีพื้นฐาน ทั้งการ Reinstall ระบบปฏิบัติการ, ปรับแต่งสัญญาณ Access Point (Omada) และตรวจสอบอุปกรณ์การพิมพ์ รวมถึงการศึกษาแนวทางการซ่อมบำรุงเชิงรุกด้านระบบจัดเก็บข้อมูล (NAS RAID 6) และการวิเคราะห์ปัญหาสัญญาณ Wi-Fi บนระบบ macOS เพื่อเตรียมความพร้อมรองรับการใช้งานขององค์กรได้อย่างมีประสิทธิภาพ 
-            </div>
-        </div>
-
-        <!-- Stats Summary -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">งานทั้งหมด</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number success">5</div>
-                <div class="stat-label">สำเร็จตามแผน (100%)</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number warning">3</div>
-                <div class="stat-label">ข้อพิจารณา / ปัญหา</div>
-            </div>
-        </div>
-
-        <div class="section-title">
-            <span>📋</span> รายละเอียดการปฏิบัติงานรายวัน (Daily Activity Log)
-        </div>
-
-        <!-- Day 1: 3 Aug 2026 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-date">วันจันทร์ที่ 3 สิงหาคม 2026</div>
-                <span class="badge-count">1 ภารกิจ</span>
-            </div>
-            <div class="task-list">
-                <div class="task-item">
-                    <div class="task-title">1. ล้างเครื่องและติดตั้งระบบปฏิบัติการใหม่ (Reset PC & Reinstall Windows)</div>
-                    <div class="status-block-group">
-                        <div class="status-block status-completed">
-                            <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
-                            <span class="status-content">Reset PC และติดตั้งระบบปฏิบัติการ Windows ใหม่เรียบร้อยแล้ว</span>
-                        </div>
-                        <div class="status-block status-learning">
-                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
-                            <span class="status-content">การเตรียม USB Boot ที่อัปเดต Driver เบื้องต้นไว้ล่วงหน้าช่วยลดเวลาในการติดตั้งระบบลงได้อย่างมาก</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 2: 4 Aug 2026 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-date">วันอังคารที่ 4 สิงหาคม 2026</div>
-                <span class="badge-count">1 ภารกิจ</span>
-            </div>
-            <div class="task-list">
-                <div class="task-item">
-                    <div class="task-title">1. ตั้งค่ารัศมีสัญญาณเครือข่ายไร้สาย (Setting Radio Omada)</div>
-                    <div class="status-block-group">
-                        <div class="status-block status-completed">
-                            <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
-                            <span class="status-content">ตั้งค่ารัศมีของสัญญาณ Access Point ในระบบ Omada เรียบร้อยแล้ว</span>
-                        </div>
-                        <div class="status-block status-blocker">
-                            <span class="status-label">⚠️ ปัญหา / อุปสรรค</span>
-                            <span class="status-content">ความท้าทายในการคำนวณระยะรัศมีของสัญญาณให้ครอบคลุมพื้นที่</span>
-                        </div>
-                        <div class="status-block status-learning">
-                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
-                            <span class="status-content">การปรับกำลังส่ง (Tx Power) ให้พอดีกับขนาดห้องช่วยลดปัญหาสัญญาณซ้อนทับกันระหว่าง AP จุดต่างๆ ได้ดีขึ้น</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 3: 5 Aug 2026 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-date">วันพุธที่ 5 สิงหาคม 2026</div>
-                <span class="badge-count">1 ภารกิจ</span>
-            </div>
-            <div class="task-list">
-                <div class="task-item">
-                    <div class="task-title">1. ตรวจเช็คหัวหมึกเครื่องปริ้นและเช็คหมึกที่เหลือ</div>
-                    <div class="status-block-group">
-                        <div class="status-block status-completed">
-                            <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
-                            <span class="status-content">ตรวจเช็คหัวพิมพ์และตรวจสอบปริมาณหมึกคงเหลือเรียบร้อยแล้ว</span>
-                        </div>
-                        <div class="status-block status-learning">
-                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
-                            <span class="status-content">การล้างหัวพิมพ์ด้วยระบบ Head Cleaning อย่างถูกวิธีช่วยยืดอายุการใช้งานและลดปัญหาเส้นหมึกขาดช่วง</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Day 4: 6 Aug 2026 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-date">วันพฤหัสบดีที่ 6 สิงหาคม 2026</div>
-                <span class="badge-count">ลาหยุด</span>
-            </div>
-            <div class="empty-day-note">
-                😴 หมายเหตุ: ลาป่วย / ลากิจ
-            </div>
-        </div>
-
-        <!-- Day 5: 7 Aug 2026 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-date">วันศุกร์ที่ 7 สิงหาคม 2026</div>
-                <span class="badge-count">2 ภารกิจ</span>
-            </div>
-            <div class="task-list">
-                <!-- Task 1 -->
-                <div class="task-item">
-                    <div class="task-title">1. Research how to setup NAS (RAID 6)</div>
-                    <div class="status-block-group">
-                        <div class="status-block status-completed">
-                            <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
-                            <span class="status-content">ศึกษาข้อมูลสเปคและการวางระบบการติดตั้งเครื่อง NAS</span>
-                        </div>
-                        <div class="status-block status-blocker">
-                            <span class="status-label">⚠️ ปัญหา / อุปสรรค</span>
-                            <span class="status-content">การพิจารณาเลือกสเปคอุปกรณ์ให้เหมาะสมกับปริมาณการใช้งานจริง</span>
-                        </div>
-                        <div class="status-block status-learning">
-                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
-                            <span class="status-content">RAID 6 รองรับ Hard Drive เสียพร้อมกันได้ถึง 2 ลูก เหมาะกับองค์กรที่เน้นความปลอดภัยของข้อมูลเป็นหลัก</span>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="task-divider">
-
-                <!-- Task 2 -->
-                <div class="task-item">
-                    <div class="task-title">2. Research network disconnect MacBook</div>
-                    <div class="status-block-group">
-                        <div class="status-block status-completed">
-                            <span class="status-label">✅ สิ่งที่ทำสำเร็จ</span>
-                            <span class="status-content">ค้นหาสาเหตุเบื้องต้นกรณีอินเทอร์เน็ตหลุดบ่อยบนเครื่อง MacBook</span>
-                        </div>
-                        <div class="status-block status-blocker">
-                            <span class="status-label">⚠️ ปัญหา / อุปสรรค</span>
-                            <span class="status-content">ยังไม่พบสาเหตุที่ชัดเจนแน่ชัด กำลังอยู่ในช่วงรวบรวมข้อมูลเพิ่มเติม</span>
-                        </div>
-                        <div class="status-block status-learning">
-                            <span class="status-label">💡 สิ่งที่ได้เรียนรู้</span>
-                            <span class="status-content">ปัญหา Wi-Fi บน macOS มักเกิดจาก Wi-Fi Roaming หรือการสะสมของ Cache Networks จำเป็นต้องใช้ Wireless Diagnostic ในการรวบรวม Log เพิ่มเติม</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<div class="bar"><div class="wrap">
+  <a class="brand" href="#top"><b>&gt;</b> kriangkai.dev</a>
+  <nav><a href="#projects" data-i18n="nav_proj"></a><a href="#work" data-i18n="nav_work"></a><a href="#contact" data-i18n="nav_contact"></a></nav>
+  <div class="tools">
+    <div class="lang" role="group" aria-label="Language">
+      <button data-l="th" aria-pressed="true">ไทย</button><button data-l="en" aria-pressed="false">EN</button><button data-l="zh" aria-pressed="false">中文</button>
     </div>
+    <button id="theme" type="button" aria-label="Toggle light/dark theme" title="Light / Dark"></button>
+  </div>
+</div></div>
 
+<main class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">$ whoami</p>
+      <h1 data-i18n="h1"></h1>
+      <p class="lead" data-i18n="hero_p"></p>
+      <div class="btns">
+        <a class="btn main" href="#projects" data-i18n="btn_proj"></a>
+        <a class="btn" href="#contact" data-i18n="btn_contact"></a>
+      </div>
+    </div>
+    <div class="termwrap">
+    <svg class="mascot" viewBox="0 0 120 110" role="img" aria-label="Cute waving mascot">
+      <g class="m-bob">
+        <path class="m-body" d="M20 44 L28 6 L52 28 Z"/><path class="m-body" d="M100 44 L92 6 L68 28 Z"/>
+        <g class="m-arm"><ellipse class="m-body" cx="110" cy="72" rx="8" ry="15"/></g>
+        <ellipse class="m-body" cx="60" cy="68" rx="46" ry="40"/>
+        <ellipse class="m-face" cx="60" cy="68" rx="36" ry="30"/>
+        <g class="m-eyes"><ellipse class="m-eye" cx="45" cy="63" rx="5" ry="6.5"/><ellipse class="m-eye" cx="75" cy="63" rx="5" ry="6.5"/><circle class="m-hl" cx="47" cy="60" r="1.8"/><circle class="m-hl" cx="77" cy="60" r="1.8"/></g>
+        <ellipse class="m-cheek" cx="35" cy="75" rx="6" ry="3.5"/><ellipse class="m-cheek" cx="85" cy="75" rx="6" ry="3.5"/>
+        <path class="m-mouth" d="M53 75 Q60 83 67 75"/>
+      </g>
+    </svg>
+    <div class="win term">
+      <div class="wb"><i></i><i></i><i></i><span>~/profile.ts</span></div>
+<pre><code><span class="k">const</span> dev = {
+  name: <span class="s">"Kriangkai Nantabut"</span>,
+  role: <span class="s">"IT Support &amp; Backend API"</span>,
+  stack: [<span class="s">"REST API"</span>, <span class="s">"Scalar"</span>,
+          <span class="s">"MikroTik"</span>, <span class="s">"TP-Link Omada"</span>],
+  openToWork: <span class="k">true</span>,
+};
+
+<span class="c">// health check</span>
+GET /status  <span class="ok">200 OK</span> <span class="cur"></span></code></pre>
+    </div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <h2 data-i18n="sec_proj"></h2>
+    <p class="sub" data-i18n="sec_proj_s"></p>
+
+    <article class="win proj">
+      <div class="wb"><i></i><i></i><i></i><span>the-senizens/app</span></div>
+      <div class="in">
+        <h3>The Senizens Application</h3>
+        <p class="tag" data-i18n="p1_s"></p>
+        <div class="chips"><span class="chip">Mobile App</span><span class="chip">AI Insights</span><span class="chip">Food Log</span><span class="chip">Meal Plan</span></div>
+        <p class="d" data-i18n="p1_d"></p>
+        <div class="pair">
+          <figure class="shot"><div class="frame"><img src="assets/img/senizens-nutritionist.webp" alt="Nutritionist dashboard" loading="lazy"></div><figcaption data-i18n="p1_c1"></figcaption></figure>
+          <figure class="shot"><div class="frame"><img src="assets/img/senizens-user.webp" alt="User app screens" loading="lazy"></div><figcaption data-i18n="p1_c2"></figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="win proj">
+      <div class="wb"><i></i><i></i><i></i><span>elegance/gold-api</span></div>
+      <div class="in">
+        <h3>Elegance Product</h3>
+        <p class="tag" data-i18n="p2_s"></p>
+        <div class="chips"><span class="chip">Backend API</span><span class="chip">Gold Trading App</span><span class="chip">TestFlight</span></div>
+        <p class="d" data-i18n="p2_d"></p>
+        <div class="pair trio">
+          <figure class="shot"><div class="frame"><img src="assets/img/elegance-splash.webp" alt="App splash screen" loading="lazy"></div><figcaption data-i18n="p2_c1"></figcaption></figure>
+          <figure class="shot"><div class="frame"><img src="assets/img/elegance-testing.webp" alt="Apps in testing" loading="lazy"></div><figcaption data-i18n="p2_c2"></figcaption></figure>
+          <figure class="shot"><div class="frame"><img src="assets/img/elegance-login.webp" alt="Login screen" loading="lazy"></div><figcaption data-i18n="p2_c3"></figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="win proj">
+      <div class="wb"><i></i><i></i><i></i><span>sukjai/backend</span></div>
+      <div class="in">
+        <h3>Sukjai Application</h3>
+        <p class="tag" data-i18n="p3_s"></p>
+        <div class="chips"><span class="chip">Backend</span><span class="chip">iOS</span><span class="chip">Android</span><span class="chip">Health</span></div>
+        <p class="d" data-i18n="p3_d"></p>
+        <div class="pair trio">
+          <figure class="shot"><div class="frame phone"><img src="assets/img/sukjai-login.webp" alt="Login screen" loading="lazy"></div><figcaption data-i18n="p3_c0"></figcaption></figure>
+          <figure class="shot"><div class="frame store"><div class="logo">Sukjai</div><div class="row">
+            <a class="btn main" href="https://apps.apple.com/us/app/id1559483008" target="_blank" rel="noopener">App Store</a>
+            <a class="btn" href="https://play.google.com/store/apps/details?id=h3c.dekdoydev.sukjai" target="_blank" rel="noopener">Google Play</a></div></div><figcaption data-i18n="p3_c1"></figcaption></figure>
+          <figure class="shot"><div class="frame store"><div class="logo">sukjai.app</div><div class="row">
+            <a class="btn" href="https://www.sukjai.app/" target="_blank" rel="noopener" data-i18n="p3_site"></a></div></div><figcaption data-i18n="p3_c2"></figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="work">
+    <h2 data-i18n="sec_work"></h2>
+    <p class="sub" data-i18n="sec_work_s"></p>
+    <div class="timeline">
+    <article class="tl"><span class="dot"></span>
+      <div class="win"><div class="wb"><i></i><i></i><i></i><span>elegance/it-support.md</span></div>
+      <div class="in"><div class="head"><h3>Elegance</h3><p class="co">IT Support</p></div><div class="chips"><span class="chip">TP-Link Omada</span><span class="chip">MikroTik</span><span class="chip">Wi-Fi</span><span class="chip">Server</span><span class="chip">REST API</span></div><div class="cards"><div class="it"><b>01</b><h4 data-i18n="w1t"></h4><p data-i18n="w1d"></p></div><div class="it"><b>02</b><h4 data-i18n="w2t"></h4><p data-i18n="w2d"></p></div><div class="it"><b>03</b><h4 data-i18n="w3t"></h4><p data-i18n="w3d"></p></div><div class="it"><b>04</b><h4 data-i18n="w4t"></h4><p data-i18n="w4d"></p></div><div class="it"><b>05</b><h4 data-i18n="w5t"></h4><p data-i18n="w5d"></p></div></div></div></div>
+    </article>
+    <article class="tl"><span class="dot"></span>
+      <div class="win"><div class="wb"><i></i><i></i><i></i><span>cdg/helpdesk.md</span></div>
+      <div class="in"><div class="head"><h3>CDG</h3><p class="co">IT Helpdesk</p></div><div class="chips"><span class="chip">Helpdesk</span><span class="chip">Support</span></div><div class="cards"><div class="it"><b>01</b><h4 data-i18n="w6t"></h4><p data-i18n="w6d"></p></div><div class="it"><b>02</b><h4 data-i18n="w7t"></h4><p data-i18n="w7d"></p></div></div></div></div>
+    </article>
+    <article class="tl"><span class="dot"></span>
+      <div class="win"><div class="wb"><i></i><i></i><i></i><span>sprouting-tech/intern.md</span></div>
+      <div class="in"><div class="head"><h3>Sprouting Tech</h3><p class="co" data-i18n="s_role"></p></div><div class="chips"><span class="chip">Backend</span><span class="chip">REST API</span><span class="chip">Database</span><span class="chip">Scalar</span></div><div class="cards"><div class="it"><b>01</b><h4 data-i18n="s1t"></h4><p data-i18n="s1d"></p></div><div class="it"><b>02</b><h4 data-i18n="s2t"></h4><p data-i18n="s2d"></p></div></div></div></div>
+    </article>
+    </div>
+    <div class="win tools"><div class="in"><h3 data-i18n="sec_tools"></h3><div class="chips"><span class="chip">TP-Link Omada</span><span class="chip">MikroTik</span><span class="chip">Wi-Fi</span><span class="chip">Server</span><span class="chip">REST API</span><span class="chip">Scalar</span><span class="chip">Database</span></div></div></div>
+  </section>
+
+  <section id="contact">
+    <h2 data-i18n="sec_contact"></h2>
+    <p class="sub" data-i18n="c_sub"></p>
+    <div class="contact">
+      <div class="cbox"><span data-i18n="c_name"></span><strong>Kriangkai Nantabut</strong></div>
+      <div class="cbox"><span data-i18n="c_mail"></span><a href="mailto:kriangkai.nantabut@gmail.com">kriangkai.nantabut@gmail.com</a></div>
+      <div class="cbox"><span data-i18n="c_tel"></span><a href="tel:+66971453585">097-145-3585</a></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© 2026 Kriangkai Nantabut</div></footer>
+
+<div id="zoom" aria-hidden="true"><img alt=""></div>
+
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
